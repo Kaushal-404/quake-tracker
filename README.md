@@ -1,6 +1,6 @@
 # Quake Tracker
 
-Android take-home for Brick: an in-pocket companion that shows the last 24 hours of
+An in-pocket companion that shows the last 24 hours of
 earthquakes from the USGS feed, as a list and on a map, with distance from the user's
 location when they allow it.
 
