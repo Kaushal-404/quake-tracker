@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Quake Application</string>
+    <string name="tab_list">List</string>
+    <string name="tab_map">Map</string>
+
+    <string name="list_title">Earthquakes, past 24 hours</string>
+    <string name="map_title">Map, past 24 hours</string>
+    <string name="sort_newest">Newest</string>
+    <string name="sort_strongest">Strongest</string>
+    <string name="sort_nearest">Nearest</string>
+    <string name="filter_all">All</string>
+    <string name="filter_moderate">M 2.5+</string>
+    <string name="filter_strong">M 4.5+</string>
+
+    <string name="location_prompt_body">Allow location to see how far away each earthquake is.</string>
+    <string name="location_prompt_allow">Allow</string>
+    <string name="location_prompt_dismiss">Not now</string>
+
+    <string name="empty_title">No earthquakes to show</string>
+    <string name="empty_body">Pull down to try again.</string>
+
+    <string name="error_no_connection">You\'re offline. Showing saved earthquakes.</string>
+    <string name="error_server">USGS returned an error (%1$d). Showing saved earthquakes.</string>
+    <string name="error_unexpected_data">Couldn\'t read the latest data. Showing saved earthquakes.</string>
+
+    <string name="action_retry">Retry</string>
+    <string name="action_dismiss">Dismiss</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_back">Back</string>
+
+    <string name="unknown_place">Unknown location</string>
+    <string name="distance_away">%1$s km away</string>
+    <string name="map_marker_snippet">Tap for details</string>
+
+    <string name="detail_title">Earthquake details</string>
+    <string name="magnitude_content_description">Magnitude %1$s</string>
+    <string name="magnitude_unknown_content_description">Magnitude unknown</string>
+    <string name="detail_time">Time</string>
+    <string name="detail_depth">Depth</string>
+    <string name="detail_depth_value">%1$s km</string>
+    <string name="detail_coordinates">Coordinates</string>
+    <string name="detail_distance">Distance from you</string>
+    <string name="detail_tsunami">Tsunami</string>
+    <string name="detail_tsunami_yes">Flagged by USGS</string>
+    <string name="detail_tsunami_no">Not flagged</string>
+    <string name="detail_open_usgs">View on USGS</string>
+    <string name="detail_not_found">This earthquake is no longer in the latest USGS data.</string>
+</resources>
