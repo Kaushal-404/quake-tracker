@@ -116,6 +116,51 @@ colour and formatting have one source of truth.
 - The detail screen's map sits inside a vertical scroll and competes for drag gestures.
 - Only coarse location is requested, so "distance from you" is city-level accuracy.
 
+### Next phase, in priority order
+
+1. **Last-updated timestamp.** Persist the time of the last successful refresh and show
+   it in the offline banner and list header. Small change, closes the biggest UX gap:
+   offline users currently cannot tell how old the data is.
+
+2. **Background refresh with WorkManager.** A periodic job (every 1 to 3 hours,
+   network-constrained, battery-aware) keeps the cache warm so the app opens with
+   fresh data.
+
+3. **Significant-event notifications.** When a background refresh brings in an event
+   above a magnitude threshold, or within a radius of the user, post a local
+   notification that deep-links to the detail screen. The brief says "in-pocket
+   companion"; this is the feature that makes it one. Firebase Cloud Messaging is not
+   needed for this, since USGS has no push channel; WorkManager plus local
+   notifications is enough and has no backend.
+
+4. **Shared refresh state.** Refresh logic is duplicated in the List and Map ViewModels
+   with separate spinners. Move it into one refresh use case or state holder so a
+   refresh started on one tab shows on the other.
+
+5. **Historical data and time windows.** USGS exposes week and month feeds plus a query
+   API with date and magnitude parameters (archive back to the 1960s). Add a window
+   selector (day, week, month) and a Room table keyed by window. This is where Paging3
+   and a bounded cache policy start to matter, and where the map needs
+   viewport-bounded queries rather than loading everything.
+
+6. **Map improvements.** Fit the camera to the data on first load instead of a fixed
+   world view. Add a "near me" camera button when location is available. Consider
+   heat-map rendering from Maps Utils for the month view.
+
+7. **Detail screen context.** Nearby-places or terrain imagery from a second public
+   source (the brief's optional idea). Keep it as a separate, failure-tolerant section
+   so the detail screen still renders if that source is down.
+8. **Early warning and personal risk context.** Earthquakes cannot be predicted, so
+   this is not a prediction feature. It is two data-backed additions:
+   - _Early warning._ Systems like USGS ShakeAlert detect the fast P-wave at sensors
+     near the epicentre and warn people further away seconds before the damaging
+     S-wave arrives. Android already does this at the OS level (Android Earthquake
+     Alerts, using phone accelerometers as a crowd-sourced sensor network). Our app
+     cannot run its own network, but it can consume ShakeAlert-derived feeds where
+     available and deep-link into the matching event when the OS alert fires.
+     Technically: a notification deep link into `DetailDestination`, plus a feed poll
+     in the WorkManager job from item 2.
+
 ## 5. Testing approach
 
 I tested the behaviour that would hurt users if it broke, with plain JUnit and
